@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './DashboardPage.css';
+import { useNavigate } from 'react-router-dom'; // ✅ Make sure this line exists
 
 const DashboardPage = () => {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const navigate = useNavigate(); // ✅ You were missing this line
+
+    // 🔐 LOGOUT FUNCTION
+    const handleLogout = () => {
+        localStorage.removeItem('token'); // remove token
+        navigate('/'); // redirect to login
+    };
 
     useEffect(() => {
         fetchUsers();
@@ -51,6 +59,7 @@ const DashboardPage = () => {
     return (
         <div style={{ padding: '2rem' }}>
             <h2>Admin Dashboard</h2>
+            <button onClick={handleLogout}>Logout</button> {/* ✅ Add this anywhere you want the logout button */}
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {success && <p style={{ color: 'green' }}>{success}</p>}
             <table border="1" cellPadding="10" cellSpacing="0">
