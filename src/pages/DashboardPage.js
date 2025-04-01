@@ -57,41 +57,53 @@ const DashboardPage = () => {
     };
 
     return (
-        <div style={{ padding: '2rem' }}>
-            <h2>Admin Dashboard</h2>
-            <button onClick={handleLogout}>Logout</button> {/* ✅ Add this anywhere you want the logout button */}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {success && <p style={{ color: 'green' }}>{success}</p>}
-            <table border="1" cellPadding="10" cellSpacing="0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Admin</th>
-                        <th>Business</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user) => (
-                        <tr key={user.user_id}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.role}</td>
-                            <td>{user.is_admin ? 'Yes' : 'No'}</td>
-                            <td>{user.is_business ? 'Yes' : 'No'}</td>
-                            <td>
-                                <button onClick={() => deleteUser(user.user_id)} style={{ color: 'red' }}>
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+      <div style={{ padding: '2rem' }}>
+        <h2>Admin Dashboard</h2>
+    
+        {/* ✅ Navigation buttons */}
+        <div style={{ marginBottom: '1rem' }}>
+          <button onClick={() => navigate('/rewards')} style={{ marginRight: '1rem' }}>
+            Manage Rewards
+          </button>
+          <button onClick={handleLogout}>Logout</button>
         </div>
+    
+        {/* ✅ Error and success messages */}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {success && <p style={{ color: 'green' }}>{success}</p>}
+    
+        {/* ✅ User table */}
+        <table border="1" cellPadding="10" cellSpacing="0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Admin</th>
+              <th>Business</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.user_id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.role}</td>
+                <td>{user.is_admin ? 'Yes' : 'No'}</td>
+                <td>{user.is_business ? 'Yes' : 'No'}</td>
+                <td>
+                  <button onClick={() => deleteUser(user.user_id)} style={{ color: 'red' }}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     );
+
 };
 
 export default DashboardPage;
