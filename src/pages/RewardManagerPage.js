@@ -56,9 +56,9 @@ const RewardManagerPage = () => {
         <tbody>
           {rewards.map((reward) => (
             <tr key={reward.reward_id}>
-              <td>{reward.title}</td>
-              <td>{reward.description}</td>
-              <td>{reward.cost}</td>
+              <td>{reward.reward_name}</td>
+              <td>{reward.points_required}</td>
+              <td>{reward.is_network_wide ? 'Yes' : 'No'}</td>
               <td>{reward.business_name}</td>
               <td>
                 <button
